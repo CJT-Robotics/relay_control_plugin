@@ -1,6 +1,6 @@
 <library path="src">
     <class name="RelayControl" type="relay_control_plugin.relay_plugin.RelayControlPlugin" base_class_type="rqt_gui_py::Plugin">
-    <description>Relay Control Panel - Web-Relay Controller</description>
+    <description>Relay Control Panel - Relay Controller</description>
     <qtgui>
         <group>
             <label>CJT-Robotics</label>

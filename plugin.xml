@@ -4,8 +4,11 @@
     <qtgui>
         <group>
             <label>CJT-Robotics</label>
+            <icon>res/favicon.png</icon>
         </group>
         <label>Relay Control Panel</label>
+        <title>Relay Control Panel</title>
+        <icon>res/favicon.png</icon>
     </qtgui>
     </class>
 </library>

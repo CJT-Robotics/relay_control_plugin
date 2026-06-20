@@ -3,6 +3,9 @@
 import rospy
 from rqt_gui_py.plugin import Plugin
 from python_qt_binding.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QComboBox, QLabel
+from python_qt_binding.QtGui import QIcon
+import os
+import rospkg
 from std_msgs.msg import String
 
 class RelayControlPlugin(Plugin):
@@ -27,6 +30,17 @@ class RelayControlPlugin(Plugin):
 
     def _setup_ui(self, context):
         self._main_widget = QWidget()
+
+        try:
+            rp = rospkg.RosPack()
+            package_path = rp.get_path('relay_control_plugin') 
+            icon_path = os.path.join(package_path, 'res', 'favicon.png')
+            self._main_widget.setWindowIcon(QIcon(icon_path))
+        except Exception as e:
+            rospy.logwarn(e)
+
+        self._main_widget.setWindowTitle('Relay Control Panel')
+
         main_layout = QVBoxLayout(self._main_widget)
 
         topic_layout = QHBoxLayout()
@@ -70,7 +84,7 @@ class RelayControlPlugin(Plugin):
         instance_settings.set_value('topic', self.topic_combo.currentText())
 
     def restore_settings(self, plugin_settings, instance_settings):
-        topic = instance_settings.value('topic', '/cam_mount/relay_cmd')
+        topic = instance_settings.value('topic', '')
         self.topic_combo.setEditText(topic)
         self._reconnect_topic()
 
